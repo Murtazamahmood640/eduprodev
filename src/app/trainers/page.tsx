@@ -41,7 +41,7 @@ const TrainersPage = () => {
                 transition={{ delay: 0.2 }}
                 className="text-gray-500 text-lg md:text-xl leading-relaxed max-w-2xl mx-auto lg:mx-0 font-medium"
               >
-                Direct access to world-renowned examiners, linguists, and subject matter specialists dedicated to your academic trajectory.
+                Direct access to world-renowned examiners, linguists, and subject matter specialists dedicated to your academic trajectory. Our faculty brings decades of expertise across O/A Levels, professional certifications, and specialized skill development.
               </motion.p>
             </div>
 
@@ -71,7 +71,7 @@ const TrainersPage = () => {
                 </div>
                 <div>
                   <p className="text-[10px] text-gray-400 font-black uppercase tracking-widest">Global Faculty</p>
-                  <p className="text-xl font-black text-primary leading-none mt-1">250+</p>
+                  <p className="text-xl font-black text-primary leading-none mt-1">6+</p>
                 </div>
               </div>
             </motion.div>

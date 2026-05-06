@@ -238,30 +238,35 @@ export default function LearnPage() {
           
           <div className="flex-1 overflow-y-auto">
             {curriculum.map((section, si) => (
-              <div key={si} className="border-b border-slate-100 last:border-0">
+              <div key={si} className="border-b-2 border-slate-100 last:border-0 overflow-hidden">
                 <button
                   onClick={() => setOpenSection(openSection === si ? -1 : si)}
-                  className="w-full flex items-center justify-between px-6 py-4 text-left hover:bg-slate-50 transition-colors group"
+                  className="w-full flex items-center justify-between px-6 py-5 text-left hover:bg-gradient-to-r hover:from-edu-indigo/5 hover:to-white transition-all group"
                 >
-                  <div>
-                    <p className="text-sm font-bold text-slate-900 group-hover:text-edu-indigo transition-colors">{section.section}</p>
-                    <p className="text-xs text-slate-400 mt-0.5">{section.lessons.length} lessons</p>
+                  <div className="flex-1">
+                    <p className="text-sm font-bold text-slate-900 group-hover:text-edu-indigo transition-colors flex items-center gap-2">
+                      <span className="flex items-center justify-center w-6 h-6 rounded-md bg-slate-100 text-xs font-black text-slate-600 group-hover:bg-edu-indigo group-hover:text-white transition-all">
+                        {si + 1}
+                      </span>
+                      {section.section}
+                    </p>
+                    <p className="text-xs text-slate-400 mt-1 ml-8">{section.lessons.length} lessons</p>
                   </div>
-                  <div className={`p-1.5 rounded-lg transition-colors ${openSection === si ? "bg-indigo-50 text-edu-indigo" : "bg-slate-100 text-slate-400 group-hover:bg-slate-200"}`}>
+                  <div className={`p-2 rounded-lg transition-all ${openSection === si ? "bg-edu-indigo/20 text-edu-indigo" : "bg-slate-100 text-slate-400 group-hover:bg-slate-200"}`}>
                     {openSection === si ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
                   </div>
                 </button>
 
                 {openSection === si && (
-                  <div className="pb-3 bg-slate-50/30">
+                  <div className="pb-3 bg-gradient-to-b from-slate-50/50 to-white space-y-1">
                     {section.lessons.map((lesson, li) => (
                       <div
                         key={li}
-                        className={`flex items-start gap-4 px-6 py-3 cursor-pointer transition-all relative ${
-                          lesson.active ? "bg-white border-y border-slate-100 shadow-sm z-10" : "hover:bg-white"
+                        className={`flex items-start gap-3 px-6 py-4 cursor-pointer transition-all mx-3 rounded-xl relative group/lesson ${
+                          lesson.active ? "bg-white border-2 border-edu-indigo shadow-md" : "hover:bg-white border-2 border-transparent hover:border-slate-100"
                         } ${lesson.locked ? "opacity-50 cursor-not-allowed" : ""}`}
                       >
-                        {lesson.active && <div className="absolute left-0 top-0 bottom-0 w-1 bg-edu-indigo" />}
+                        {lesson.active && <div className="absolute left-0 top-0 bottom-0 w-1.5 bg-edu-indigo rounded-r-lg" />}
                         
                         <div className="flex-shrink-0 mt-0.5">
                           {lesson.locked ? (
@@ -269,14 +274,14 @@ export default function LearnPage() {
                           ) : lesson.done ? (
                             <CheckCircle className="w-4 h-4 text-emerald-500" />
                           ) : (
-                            <PlayCircle className={`w-4 h-4 ${lesson.active ? "text-edu-indigo" : "text-slate-300"}`} />
+                            <PlayCircle className={`w-4 h-4 transition-colors ${lesson.active ? "text-edu-indigo" : "text-slate-300 group-hover/lesson:text-edu-indigo"}`} />
                           )}
                         </div>
                         <div className="flex-1 min-w-0">
-                          <p className={`text-sm leading-snug mb-1 ${lesson.active ? "text-edu-indigo font-bold" : lesson.done ? "text-slate-500" : "text-slate-700 font-medium"}`}>
+                          <p className={`text-sm leading-snug mb-1.5 transition-all ${lesson.active ? "text-edu-indigo font-bold" : lesson.done ? "text-slate-500" : "text-slate-700 font-medium group-hover/lesson:text-slate-900"}`}>
                             {lesson.title}
                           </p>
-                          <div className="flex items-center gap-1.5 text-xs text-slate-400">
+                          <div className="flex items-center gap-1.5 text-xs text-slate-400 group-hover/lesson:text-slate-500 transition-colors">
                             <Clock className="w-3 h-3" /> {lesson.duration}
                           </div>
                         </div>

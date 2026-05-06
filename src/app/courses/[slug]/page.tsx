@@ -154,29 +154,31 @@ const CourseDetailPage = () => {
               
               {/* Outline */}
               <div>
-                <h2 className="text-2xl font-black text-gray-900 mb-8 tracking-tight">Detailed Course Outline</h2>
-                <div className="space-y-4">
+                <h2 className="text-3xl font-black text-gray-900 mb-10 tracking-tight">Course Outline</h2>
+                <div className="space-y-5">
                   {course.outline.map((module, i) => (
-                    <div key={i} className="border border-gray-100 rounded-xl overflow-hidden">
-                      <div className="flex items-center justify-between p-5 bg-gray-50">
+                    <div key={i} className="border-2 border-gray-200 rounded-2xl overflow-hidden hover:border-primary/40 transition-colors group">
+                      <div className="flex items-center justify-between p-6 bg-gradient-to-r from-gray-50 to-white hover:from-primary/5 hover:to-white transition-colors">
                         <div className="flex items-center gap-4">
-                          <div className="w-8 h-8 bg-white border border-gray-200 rounded-lg flex items-center justify-center text-xs font-black text-primary">
-                            0{i + 1}
+                          <div className="w-10 h-10 bg-white border-2 border-primary rounded-lg flex items-center justify-center text-xs font-black text-primary shadow-md">
+                            {i + 1}
                           </div>
-                          <h4 className="font-black text-gray-900 text-sm md:text-base">{module.title}</h4>
+                          <div>
+                            <h4 className="font-black text-gray-900 text-base md:text-lg group-hover:text-primary transition-colors">{module.title}</h4>
+                          </div>
                         </div>
-                        <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest bg-white px-2 py-1 rounded-md border border-gray-100">
+                        <span className="text-[11px] font-bold text-primary uppercase tracking-widest bg-primary/10 px-3 py-1.5 rounded-lg border border-primary/20">
                           {module.duration}
                         </span>
                       </div>
-                      <div className="p-5 bg-white space-y-3">
+                      <div className="p-6 bg-white space-y-4 border-t-2 border-gray-100">
                         {module.lessons.map((lesson, j) => (
-                          <div key={j} className="flex items-center justify-between text-xs font-semibold text-gray-500 hover:text-primary transition-colors cursor-pointer group">
+                          <div key={j} className="flex items-center justify-between text-sm font-semibold text-gray-600 hover:text-primary transition-all hover:pl-2 cursor-pointer group/lesson">
                             <div className="flex items-center gap-3">
-                              <PlayCircle className="w-3.5 h-3.5 opacity-30 group-hover:opacity-100" />
-                              {lesson}
+                              <PlayCircle className="w-4 h-4 text-primary/60 group-hover/lesson:text-primary group-hover/lesson:scale-110 transition-all" />
+                              <span className="group-hover/lesson:font-bold">{lesson}</span>
                             </div>
-                            <span className="text-[10px] opacity-40">Video</span>
+                            <span className="text-xs font-bold text-gray-400 group-hover/lesson:text-primary/70 transition-colors">Video</span>
                           </div>
                         ))}
                       </div>

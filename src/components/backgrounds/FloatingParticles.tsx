@@ -114,7 +114,7 @@ export const FloatingParticles = () => {
     <canvas
       ref={canvasRef}
       className="fixed inset-0 pointer-events-none hidden md:block"
-      style={{ background: 'transparent', zIndex: -100 }}
+      style={{ background: 'transparent', zIndex: -50 }}
     />
   );
 };

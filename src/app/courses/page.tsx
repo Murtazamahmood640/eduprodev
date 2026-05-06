@@ -8,7 +8,7 @@ import { Search, Filter, Sparkles, BookOpen } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { COURSES } from "@/lib/data";
 
-const categories = ["All", "Mathematics", "Languages", "Science", "Tech", "Business"];
+const categories = ["All", "Mathematics", "Languages", "Science", "Tech", "Business", "Arts", "Social Studies"];
 
 const CoursesPage = () => {
   const [selectedCategory, setSelectedCategory] = useState("All");
@@ -43,8 +43,8 @@ const CoursesPage = () => {
                 transition={{ delay: 0.1 }}
                 className="text-3xl md:text-6xl font-black text-gray-900 mb-6 tracking-tight leading-tight"
               >
-                Explore Our <br />
-                <span className="text-primary">Mastery Courses</span>
+                Discover Premium <br />
+                <span className="text-primary">Expert-Led Courses</span>
               </motion.h1>
               <motion.p 
                 initial={{ opacity: 0, y: 16 }}

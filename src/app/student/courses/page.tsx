@@ -76,7 +76,7 @@ export default function StudentCourses() {
         className="flex items-center justify-between"
       >
         <div>
-          <h1 className="font-display text-3xl font-bold text-slate-900">📚 My Courses</h1>
+          <h1 className="font-display text-3xl font-bold text-slate-900">My Courses</h1>
           <p className="text-slate-500 text-sm mt-2">{courses.length} enrolled · {completed.length} completed · Keep learning!</p>
         </div>
         <Link href="/student/browse" className="flex items-center gap-2 bg-gradient-to-r from-edu-indigo to-indigo-600 text-white px-6 py-3 rounded-xl font-bold text-sm hover:shadow-lg transition-all hover:scale-105 active:scale-95">
@@ -193,8 +193,8 @@ export default function StudentCourses() {
               >
                 {/* Badge */}
                 <div className="absolute top-4 right-4 z-10">
-                  <div className="px-3 py-1.5 bg-gradient-to-r from-emerald-500 to-teal-600 text-white text-xs font-bold rounded-lg shadow-lg">
-                    ✓ Completed
+                  <div className="px-3 py-1.5 bg-gradient-to-r from-emerald-500 to-teal-600 text-white text-xs font-bold rounded-lg shadow-lg flex items-center gap-1">
+                    <CheckCircle className="w-3 h-3" /> Completed
                   </div>
                 </div>
 
@@ -223,9 +223,9 @@ export default function StudentCourses() {
                     {course.certificate && (
                       <Link 
                         href="/student/certificates" 
-                        className="px-3 py-1.5 bg-gradient-to-r from-amber-500 to-orange-600 text-white text-xs font-bold rounded-lg hover:shadow-lg transition-all"
+                        className="px-3 py-1.5 bg-gradient-to-r from-amber-500 to-orange-600 text-white text-xs font-bold rounded-lg hover:shadow-lg transition-all flex items-center gap-1"
                       >
-                        🏆 Certificate
+                        <Award className="w-3 h-3" /> Certificate
                       </Link>
                     )}
                     <button className="flex items-center gap-1.5 px-3 py-1.5 bg-slate-100 text-slate-600 text-xs font-bold rounded-lg hover:bg-slate-200 transition-all">

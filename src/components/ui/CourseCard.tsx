@@ -35,12 +35,12 @@ const CourseCard: React.FC<CourseCardProps> = ({
     <motion.div 
       initial={{ opacity: 0, y: 8 }}
       animate={{ opacity: 1, y: 0 }}
-      whileHover={{ y: -8 }}
+      whileHover={{ y: -12 }}
       transition={{ duration: 0.3 }}
-      className="group bg-white rounded-2xl border border-gray-100 shadow-lg hover:shadow-2xl hover:shadow-primary/10 hover:border-primary/30 transition-all duration-500 overflow-hidden flex flex-col h-full relative"
+      className="group bg-white rounded-3xl border-2 border-gray-100 shadow-lg hover:shadow-2xl hover:shadow-primary/20 hover:border-primary/40 transition-all duration-500 overflow-hidden flex flex-col h-full relative"
     >
       {/* Glow effect on hover */}
-      <div className="absolute -inset-0.5 bg-gradient-to-r from-primary/0 via-primary/0 to-primary/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+      <div className="absolute -inset-0.5 bg-gradient-to-r from-primary/0 via-primary/10 to-primary/5 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
       
       <div className="relative flex flex-col h-full">
         {/* Image Section */}
@@ -48,19 +48,19 @@ const CourseCard: React.FC<CourseCardProps> = ({
           <img
             src={image}
             alt={title}
-            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-125"
             onError={(e) => {
               const img = e.target as HTMLImageElement;
               img.style.display = 'none';
             }}
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
+          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
             <motion.div
-              initial={{ scale: 0.8, opacity: 0 }}
+              initial={{ scale: 0.7, opacity: 0 }}
               whileHover={{ scale: 1, opacity: 1 }}
               transition={{ duration: 0.3 }}
             >
-              <PlayCircle className="text-white w-16 h-16 opacity-90 drop-shadow-xl" />
+              <PlayCircle className="text-white w-20 h-20 opacity-100 drop-shadow-2xl fill-white" />
             </motion.div>
           </div>
         <div className="absolute top-3 left-3 flex flex-col gap-2">
@@ -96,24 +96,24 @@ const CourseCard: React.FC<CourseCardProps> = ({
             <Link href={`/courses/${id}`} className="hover:underline">{title}</Link>
           </h3>
 
-          <div className="mt-auto pt-5 flex items-center justify-between border-t border-gray-100">
+          <div className="mt-auto pt-6 flex items-center justify-between border-t-2 border-gray-100">
             <div className="flex items-center gap-2.5">
               <img 
                 src={teacher?.image} 
                 alt={teacher?.name} 
-                className="w-8 h-8 rounded-full object-cover border-2 border-gray-100 shadow-sm"
+                className="w-9 h-9 rounded-full object-cover border-2 border-primary/20 shadow-md"
               />
               <div className="flex flex-col">
-                <span className="text-[10px] font-bold text-gray-600 leading-none">{teacher?.name}</span>
+                <span className="text-xs font-bold text-gray-900 leading-none">{teacher?.name}</span>
                 <span className="text-[9px] text-gray-400 font-semibold mt-0.5">{teacher?.specialty}</span>
               </div>
             </div>
             <motion.div 
               className="text-right"
-              whileHover={{ scale: 1.05 }}
+              whileHover={{ scale: 1.1 }}
               transition={{ duration: 0.2 }}
             >
-              <span className="text-sm font-black text-primary">{price}</span>
+              <span className="text-base font-black text-primary">{price}</span>
             </motion.div>
           </div>
         </div>

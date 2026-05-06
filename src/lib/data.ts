@@ -174,7 +174,60 @@ export const COURSES: Course[] = [
       { title: "Daily Life in Germany", duration: "10 hours", lessons: ["Ordering Food", "Asking for Directions", "Shopping", "Health & Doctor visits"] },
     ],
   },
+  {
+    id: "chemistry-o-level",
+    title: "Chemistry O Level (5070) — Complete Series",
+    category: "Science",
+    instructorId: "kashif-ismail",
+    rating: 4.8,
+    students: 6800,
+    price: "PKR 14,000",
+    image: "https://images.unsplash.com/photo-1576091160550-112173f7f869?auto=format&fit=crop&q=80&w=800&h=500",
+    level: "Intermediate",
+    description: "Master Chemistry O Level with Kashif Ismail. From atomic structure to organic chemistry, this comprehensive course uses visual learning and practical demonstrations to make complex concepts simple.",
+    outline: [
+      { title: "Atomic Structure & Bonding", duration: "9 hours", lessons: ["Electrons & Orbitals", "Ionic Bonding", "Covalent Bonding", "Metallic Bonding"] },
+      { title: "Chemical Reactions", duration: "11 hours", lessons: ["Oxidation & Reduction", "Equilibrium", "Acid-Base Chemistry", "Reaction Rates"] },
+      { title: "Organic Chemistry", duration: "10 hours", lessons: ["Hydrocarbons", "Functional Groups", "Reaction Mechanisms", "Polymers"] },
+      { title: "Practical Skills & Lab", duration: "6 hours", lessons: ["Titrations", "Qualitative Analysis", "Lab Safety", "Data Handling"] },
+    ],
+  },
+  {
+    id: "urdu-a-level",
+    title: "Urdu Literature A Level — Classical & Modern",
+    category: "Languages",
+    instructorId: "uzma-siraj",
+    rating: 4.9,
+    students: 5600,
+    price: "PKR 13,000",
+    image: "https://images.unsplash.com/photo-1507842217343-583f7270bfba?auto=format&fit=crop&q=80&w=800&h=500",
+    level: "Advanced",
+    description: "Explore the richness of Urdu literature from classical poetry to modern prose. Uzma Siraj guides students through critical analysis and creative writing in Urdu, ensuring excellence in A Level examinations.",
+    outline: [
+      { title: "Classical Poetry", duration: "12 hours", lessons: ["Ghazal Tradition", "Iqbal's Philosophy", "Metaphor & Symbolism", "Critical Analysis"] },
+      { title: "Modern Literature", duration: "10 hours", lessons: ["Short Stories", "Novels & Narratives", "Contemporary Writers", "Literary Devices"] },
+      { title: "Writing Skills", duration: "8 hours", lessons: ["Essay Writing", "Creative Composition", "Critical Response", "Exam Technique"] },
+    ],
+  },
+  {
+    id: "mathematics-a-level",
+    title: "Mathematics A Level (9709) — Advanced Mastery",
+    category: "Mathematics",
+    instructorId: "waleed-anwar",
+    rating: 5.0,
+    students: 9200,
+    price: "PKR 16,000",
+    image: "https://images.unsplash.com/photo-1453847585129-71efb826e8c1?auto=format&fit=crop&q=80&w=800&h=500",
+    level: "Advanced",
+    description: "Progress to A Level Mathematics with Waleed Anwar's proven 'Waleed Method'. This course covers pure mathematics, mechanics, and statistics with extensive past paper solutions from CIE.",
+    outline: [
+      { title: "Pure Mathematics 1", duration: "14 hours", lessons: ["Complex Numbers", "Polynomials", "Series & Sequences", "Differentiation & Integration"] },
+      { title: "Pure Mathematics 2", duration: "12 hours", lessons: ["Trigonometric Functions", "Logarithms & Exponentials", "Vectors", "Calculus Applications"] },
+      { title: "Mechanics & Statistics", duration: "10 hours", lessons: ["Forces & Motion", "Probability Distributions", "Hypothesis Testing", "Regression"] },
+    ],
+  },
 ];
+
 
 export const getTeacherById = (id: string) => TEACHERS.find((t) => t.id === id);
 export const getCoursesByTeacherId = (teacherId: string) =>
