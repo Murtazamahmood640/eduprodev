@@ -2,7 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
-import { PlayCircle, Clock, CheckCircle, Lock, ChevronRight, RotateCcw, TrendingUp } from "lucide-react";
+import { PlayCircle, Clock, CheckCircle, Lock, ChevronRight, RotateCcw, TrendingUp, Award } from "lucide-react";
 import { motion } from "framer-motion";
 
 const courses = [
