@@ -1,9 +1,10 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
-import { PlayCircle, Clock, CheckCircle, Lock, ChevronRight, RotateCcw, TrendingUp, Award } from "lucide-react";
+import { PlayCircle, Clock, CheckCircle, Lock, ChevronRight, RotateCcw, TrendingUp, Award, Plus } from "lucide-react";
 import { motion } from "framer-motion";
+import SlideOverlay from "@/components/ui/SlideOverlay";
 
 const courses = [
   {
@@ -65,6 +66,7 @@ const courses = [
 ];
 
 export default function StudentCourses() {
+  const [isFormOpen, setIsFormOpen] = useState(false);
   const inProgress = courses.filter((c) => c.status === "In Progress");
   const completed = courses.filter((c) => c.status === "Completed");
 
@@ -79,9 +81,14 @@ export default function StudentCourses() {
           <h1 className="font-display text-3xl font-bold text-slate-900">My Courses</h1>
           <p className="text-slate-500 text-sm mt-2">{courses.length} enrolled · {completed.length} completed · Keep learning!</p>
         </div>
-        <Link href="/student/browse" className="flex items-center gap-2 bg-gradient-to-r from-edu-indigo to-indigo-600 text-white px-6 py-3 rounded-xl font-bold text-sm hover:shadow-lg transition-all hover:scale-105 active:scale-95">
-          + Enroll New
-        </Link>
+        <motion.button
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          onClick={() => setIsFormOpen(true)}
+          className="flex items-center gap-2 bg-gradient-to-r from-edu-indigo to-indigo-600 text-white px-6 py-3 rounded-xl font-bold text-sm hover:shadow-lg transition-all"
+        >
+          <Plus className="w-5 h-5" /> Explore More
+        </motion.button>
       </motion.div>
 
       {/* In Progress */}
@@ -240,6 +247,59 @@ export default function StudentCourses() {
           </div>
         </motion.div>
       )}
+
+      {/* ── Browse & Enroll Form ── */}
+      <SlideOverlay
+        isOpen={isFormOpen}
+        onClose={() => setIsFormOpen(false)}
+        title="Explore Courses"
+        subtitle="Discover and enroll in new courses"
+      >
+        <div className="space-y-6">
+          <div>
+            <label className="block text-sm font-bold text-gray-900 mb-3">Featured Courses</label>
+            <div className="space-y-3">
+              {[
+                { name: "Chemistry O Level", instructor: "Kashif Ismail", price: "PKR 14,000" },
+                { name: "Urdu Literature A Level", instructor: "Uzma Siraj", price: "PKR 13,000" },
+                { name: "Commerce O Level", instructor: "Waleed Anwar", price: "PKR 12,000" }
+              ].map((course, i) => (
+                <motion.div
+                  key={i}
+                  whileHover={{ x: 4 }}
+                  className="p-4 bg-gradient-to-r from-edu-indigo/5 to-transparent border border-edu-indigo/20 rounded-xl cursor-pointer hover:border-edu-indigo/40 transition-all"
+                >
+                  <p className="font-bold text-gray-900 text-sm mb-1">{course.name}</p>
+                  <p className="text-xs text-gray-500 mb-2">{course.instructor}</p>
+                  <p className="text-sm font-bold text-edu-indigo">{course.price}</p>
+                  <motion.button
+                    whileHover={{ scale: 1.02 }}
+                    className="mt-3 w-full py-2 bg-edu-indigo text-white text-xs font-bold rounded-lg hover:shadow-md transition-all"
+                  >
+                    View Details
+                  </motion.button>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+
+          <motion.button
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            onClick={() => setIsFormOpen(false)}
+            className="w-full py-3 bg-gradient-to-r from-edu-indigo to-indigo-600 text-white font-bold rounded-xl shadow-lg shadow-edu-indigo/30 hover:shadow-xl transition-all"
+          >
+            View All Courses
+          </motion.button>
+
+          <button
+            onClick={() => setIsFormOpen(false)}
+            className="w-full py-3 bg-gray-100 text-gray-700 font-bold rounded-xl hover:bg-gray-200 transition-all"
+          >
+            Close
+          </button>
+        </div>
+      </SlideOverlay>
     </div>
   );
 }
