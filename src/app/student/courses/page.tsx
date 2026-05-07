@@ -103,64 +103,58 @@ export default function StudentCourses() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: idx * 0.05 }}
-              whileHover={{ y: -4 }}
-              className="group bg-white rounded-2xl border border-slate-200 shadow-sm hover:shadow-xl transition-all overflow-hidden"
+              whileHover={{ y: -6, scale: 1.02 }}
+              className="group bg-white rounded-2xl border border-slate-200 shadow-md hover:shadow-2xl transition-all overflow-hidden flex flex-col h-full"
             >
               {/* Course Image */}
-              <div className="relative h-40 overflow-hidden bg-gradient-to-br from-slate-100 to-slate-200">
+              <div className="relative h-48 overflow-hidden bg-gradient-to-br from-slate-100 to-slate-200">
                 <img 
                   src={course.image} 
                   alt={course.title}
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  className="w-full h-full object-cover group-hover:scale-125 transition-transform duration-500"
                 />
-                <div className={`absolute inset-0 bg-gradient-to-br ${course.color} opacity-20`} />
-                <div className="absolute top-3 right-3 px-3 py-1 bg-white/90 backdrop-blur-sm rounded-lg text-xs font-bold text-slate-700">
-                  {course.progress}%
+                <div className={`absolute inset-0 bg-gradient-to-br ${course.color} opacity-10`} />
+                <div className="absolute top-4 right-4 flex items-center justify-center w-14 h-14 rounded-full bg-white shadow-lg">
+                  <div className="text-center">
+                    <p className="text-lg font-black text-slate-900">{course.progress}%</p>
+                  </div>
                 </div>
               </div>
 
-              {/* Progress Bar */}
-              <div className="h-1.5 bg-slate-100">
-                <div 
-                  className={`h-full bg-gradient-to-r ${course.color} transition-all`} 
-                  style={{ width: `${course.progress}%` }} 
-                />
-              </div>
-
-              <div className="p-5">
-                <div className="flex gap-3 items-start mb-4">
-                  <div className={`w-10 h-10 rounded-lg bg-gradient-to-br ${course.color} flex items-center justify-center flex-shrink-0 shadow-md`}>
-                    <PlayCircle className="w-5 h-5 text-white" />
+              <div className="p-6 flex flex-col flex-1">
+                {/* Header */}
+                <div className="flex gap-3 items-start mb-6">
+                  <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${course.color} flex items-center justify-center flex-shrink-0 shadow-lg`}>
+                    <PlayCircle className="w-6 h-6 text-white" />
                   </div>
                   <div className="flex-1 min-w-0">
-                    <p className="font-bold text-slate-900 leading-tight text-sm line-clamp-2 mb-0.5">{course.title}</p>
-                    <p className="text-xs text-slate-500">{course.instructor}</p>
+                    <p className="font-bold text-slate-900 leading-tight text-base line-clamp-2 mb-1">{course.title}</p>
+                    <p className="text-sm text-slate-500 font-medium">{course.instructor}</p>
                   </div>
                 </div>
 
-                <div className="space-y-3">
-                  {/* Lessons Progress */}
-                  <div className="flex justify-between text-xs text-slate-500">
-                    <span className="font-medium">{course.completedLessons}/{course.totalLessons} lessons</span>
-                    <span className="text-edu-indigo font-bold">{course.progress}%</span>
+                {/* Progress Info */}
+                <div className="space-y-4 mb-6">
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs font-semibold text-slate-600">{course.completedLessons}/{course.totalLessons} lessons</span>
                   </div>
-                  <div className="h-2 bg-slate-100 rounded-full overflow-hidden">
+                  <div className="h-2.5 bg-slate-100 rounded-full overflow-hidden">
                     <div className={`h-full bg-gradient-to-r ${course.color} rounded-full transition-all`} style={{ width: `${course.progress}%` }} />
                   </div>
 
-                  {/* Last Lesson */}
-                  <div className="flex items-center gap-2 text-xs text-slate-400 pt-1">
-                    <Clock className="w-3.5 h-3.5 flex-shrink-0" />
-                    <span className="truncate">Last: {course.lastLesson}</span>
+                  {/* Last Lesson - Compact */}
+                  <div className="flex items-center gap-2 text-xs text-slate-500 bg-slate-50 px-3 py-2 rounded-lg">
+                    <Clock className="w-3.5 h-3.5 flex-shrink-0 text-slate-400" />
+                    <span className="truncate font-medium">Last: {course.lastLesson}</span>
                   </div>
                 </div>
 
                 {/* Action Button */}
                 <Link 
                   href={`/student/courses/${course.id}/learn`} 
-                  className="w-full mt-4 py-2.5 bg-gradient-to-r from-edu-indigo to-indigo-600 text-white text-sm font-bold rounded-xl hover:shadow-lg transition-all text-center group-hover:scale-105 active:scale-95"
+                  className={`w-full py-3 bg-gradient-to-r ${course.color} text-white text-sm font-bold rounded-xl hover:shadow-xl transition-all text-center group-hover:scale-105 active:scale-95 mt-auto`}
                 >
-                  Continue →
+                  Continue Learning
                 </Link>
               </div>
             </motion.div>
@@ -188,48 +182,56 @@ export default function StudentCourses() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2 + idx * 0.05 }}
-                whileHover={{ y: -4 }}
-                className="group bg-white rounded-2xl border border-slate-200 shadow-sm hover:shadow-xl transition-all overflow-hidden relative"
+                whileHover={{ y: -6, scale: 1.02 }}
+                className="group bg-white rounded-2xl border border-slate-200 shadow-md hover:shadow-2xl transition-all overflow-hidden relative flex flex-col h-full"
               >
-                {/* Badge */}
+                {/* Completion Badge */}
                 <div className="absolute top-4 right-4 z-10">
-                  <div className="px-3 py-1.5 bg-gradient-to-r from-emerald-500 to-teal-600 text-white text-xs font-bold rounded-lg shadow-lg flex items-center gap-1">
-                    <CheckCircle className="w-3 h-3" /> Completed
+                  <div className="px-4 py-2 bg-gradient-to-r from-emerald-500 to-teal-600 text-white text-xs font-bold rounded-xl shadow-lg flex items-center gap-1.5 backdrop-blur-sm bg-opacity-95">
+                    <CheckCircle className="w-4 h-4" /> Completed
                   </div>
                 </div>
 
                 {/* Course Image */}
-                <div className="relative h-40 overflow-hidden bg-gradient-to-br from-slate-100 to-slate-200">
+                <div className="relative h-48 overflow-hidden bg-gradient-to-br from-slate-100 to-slate-200">
                   <img 
                     src={course.image} 
                     alt={course.title}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 opacity-80 group-hover:opacity-100"
+                    className="w-full h-full object-cover group-hover:scale-125 transition-transform duration-500 opacity-75 group-hover:opacity-90"
                   />
-                  <div className={`absolute inset-0 bg-gradient-to-br ${course.color} opacity-30`} />
+                  <div className={`absolute inset-0 bg-gradient-to-br ${course.color} opacity-15`} />
                 </div>
 
-                <div className="p-5">
-                  <div className="flex gap-3 items-start mb-4">
-                    <div className={`w-10 h-10 rounded-lg bg-gradient-to-br ${course.color} flex items-center justify-center flex-shrink-0 shadow-md`}>
-                      <CheckCircle className="w-5 h-5 text-white" />
+                <div className="p-6 flex flex-col flex-1">
+                  {/* Header */}
+                  <div className="flex gap-3 items-start mb-6">
+                    <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${course.color} flex items-center justify-center flex-shrink-0 shadow-lg`}>
+                      <CheckCircle className="w-6 h-6 text-white" />
                     </div>
                     <div className="flex-1">
-                      <p className="font-bold text-slate-900 text-sm line-clamp-2 mb-0.5">{course.title}</p>
-                      <p className="text-xs text-slate-500">{course.instructor}</p>
+                      <p className="font-bold text-slate-900 text-base line-clamp-2 mb-1">{course.title}</p>
+                      <p className="text-sm text-slate-500 font-medium">{course.instructor}</p>
                     </div>
                   </div>
 
-                  <div className="flex gap-2 flex-wrap">
+                  {/* Achievement Info */}
+                  <div className="bg-emerald-50 border border-emerald-200 rounded-lg p-4 mb-6">
+                    <p className="text-sm font-bold text-emerald-700">Course Completed</p>
+                    <p className="text-xs text-emerald-600 mt-1">You've successfully finished this course</p>
+                  </div>
+
+                  {/* Actions */}
+                  <div className="flex gap-2 flex-col mt-auto">
                     {course.certificate && (
                       <Link 
                         href="/student/certificates" 
-                        className="px-3 py-1.5 bg-gradient-to-r from-amber-500 to-orange-600 text-white text-xs font-bold rounded-lg hover:shadow-lg transition-all flex items-center gap-1"
+                        className="px-4 py-2.5 bg-gradient-to-r from-amber-500 to-orange-600 text-white text-sm font-bold rounded-xl hover:shadow-lg transition-all flex items-center justify-center gap-1.5"
                       >
-                        <Award className="w-3 h-3" /> Certificate
+                        <Award className="w-4 h-4" /> View Certificate
                       </Link>
                     )}
-                    <button className="flex items-center gap-1.5 px-3 py-1.5 bg-slate-100 text-slate-600 text-xs font-bold rounded-lg hover:bg-slate-200 transition-all">
-                      <RotateCcw className="w-3 h-3" /> Review
+                    <button className="flex items-center justify-center gap-1.5 px-4 py-2.5 bg-slate-100 text-slate-700 text-sm font-bold rounded-xl hover:bg-slate-200 transition-all border border-slate-200">
+                      <RotateCcw className="w-4 h-4" /> Review Course
                     </button>
                   </div>
                 </div>
