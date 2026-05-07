@@ -119,7 +119,36 @@ const TrainersPage = () => {
                     {trainer.bio}
                   </p>
 
-                  <div className="flex items-center justify-between pt-8 border-t border-gray-50">
+                  {/* Experience & Achievements */}
+                  <div className="grid grid-cols-2 gap-4 py-5 border-y border-gray-100">
+                    {trainer.experience && (
+                      <div className="bg-gray-50 p-4 rounded-xl">
+                        <p className="text-[9px] font-bold text-gray-400 uppercase tracking-wider mb-1">Experience</p>
+                        <p className="text-sm font-black text-gray-900">{trainer.experience}</p>
+                      </div>
+                    )}
+                    <div className="bg-gray-50 p-4 rounded-xl">
+                      <p className="text-[9px] font-bold text-gray-400 uppercase tracking-wider mb-1">Students Taught</p>
+                      <p className="text-sm font-black text-gray-900">{trainer.reviews}+</p>
+                    </div>
+                  </div>
+
+                  {/* Achievements */}
+                  {trainer.achievements && trainer.achievements.length > 0 && (
+                    <div className="space-y-2">
+                      <p className="text-[9px] font-bold text-gray-400 uppercase tracking-wider">Key Achievements</p>
+                      <div className="space-y-2">
+                        {trainer.achievements.map((achievement, i) => (
+                          <div key={i} className="flex items-start gap-2">
+                            <Award className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" />
+                            <span className="text-xs font-semibold text-gray-600">{achievement}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  <div className="flex items-center justify-between pt-6 border-t border-gray-50">
                     <div className="flex space-x-2">
                       {[Linkedin, Globe, Share2].map((Icon, i) => (
                         <button key={i} className="w-10 h-10 flex items-center justify-center bg-gray-50 text-gray-400 hover:text-primary hover:bg-primary-50 rounded-xl transition-all">

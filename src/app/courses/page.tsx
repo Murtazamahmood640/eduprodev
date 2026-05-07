@@ -12,12 +12,17 @@ const categories = ["All", "Mathematics", "Languages", "Science", "Tech", "Busin
 
 const CoursesPage = () => {
   const [selectedCategory, setSelectedCategory] = useState("All");
+  const [selectedLevel, setSelectedLevel] = useState("All");
   const [searchQuery, setSearchQuery] = useState("");
+
+  const levels = ["All", "Beginner", "Intermediate", "Advanced"];
 
   const filteredCourses = COURSES.filter((course) => {
     const matchesCategory = selectedCategory === "All" || course.category === selectedCategory;
-    const matchesSearch = course.title.toLowerCase().includes(searchQuery.toLowerCase());
-    return matchesCategory && matchesSearch;
+    const matchesLevel = selectedLevel === "All" || course.level === selectedLevel;
+    const matchesSearch = course.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
+                         course.description.toLowerCase().includes(searchQuery.toLowerCase());
+    return matchesCategory && matchesLevel && matchesSearch;
   });
 
   return (
@@ -107,25 +112,65 @@ const CoursesPage = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
           {/* Filters Bar */}
-          <div className="flex flex-wrap items-center gap-3 mb-16 pb-8 border-b border-gray-50">
-            <div className="flex items-center gap-2 px-5 py-2.5 text-[10px] font-black text-gray-400 uppercase tracking-widest border-r border-gray-100 mr-2">
-              <Filter className="w-4 h-4" />
-              Filter By
+          <div className="space-y-6 mb-16 pb-8 border-b border-gray-100">
+            {/* Category Filter */}
+            <div>
+              <div className="flex items-center gap-2 px-3 py-1.5 text-[10px] font-black text-gray-400 uppercase tracking-widest mb-4">
+                <Filter className="w-4 h-4" />
+                Category
+              </div>
+              <div className="flex flex-wrap items-center gap-3">
+                {categories.map((cat) => (
+                  <button
+                    key={cat}
+                    onClick={() => setSelectedCategory(cat)}
+                    className={`px-6 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all border-2 ${
+                      selectedCategory === cat
+                        ? "bg-primary border-primary text-white shadow-lg shadow-primary/30"
+                        : "bg-white border-gray-200 text-gray-600 hover:border-primary/30 hover:bg-gray-50"
+                    }`}
+                  >
+                    {cat}
+                  </button>
+                ))}
+              </div>
             </div>
-            {categories.map((cat) => (
-              <button
-                key={cat}
-                onClick={() => setSelectedCategory(cat)}
-                className={`px-8 py-3 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all ${
-                  selectedCategory === cat
-                    ? "bg-primary text-white shadow-xl shadow-primary/20"
-                    : "bg-gray-50 text-gray-400 hover:bg-gray-100 hover:text-gray-900"
-                }`}
-              >
-                {cat}
-              </button>
-            ))}
+
+            {/* Level Filter */}
+            <div>
+              <div className="flex items-center gap-2 px-3 py-1.5 text-[10px] font-black text-gray-400 uppercase tracking-widest mb-4">
+                <Sparkles className="w-4 h-4" />
+                Difficulty Level
+              </div>
+              <div className="flex flex-wrap items-center gap-3">
+                {levels.map((level) => (
+                  <button
+                    key={level}
+                    onClick={() => setSelectedLevel(level)}
+                    className={`px-6 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all border-2 ${
+                      selectedLevel === level
+                        ? "bg-primary border-primary text-white shadow-lg shadow-primary/30"
+                        : "bg-white border-gray-200 text-gray-600 hover:border-primary/30 hover:bg-gray-50"
+                    }`}
+                  >
+                    {level}
+                  </button>
+                ))}
+              </div>
+            </div>
           </div>
+
+          {/* Results Info */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="mb-8"
+          >
+            <p className="text-sm font-bold text-gray-500">
+              Showing <span className="font-black text-gray-900">{filteredCourses.length}</span> {filteredCourses.length === 1 ? 'course' : 'courses'} 
+              {searchQuery && ` matching "${searchQuery}"`}
+            </p>
+          </motion.div>
 
           {/* Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">

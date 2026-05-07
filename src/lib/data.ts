@@ -26,6 +26,7 @@ export interface Course {
   students: number;
   price: string;
   image: string;
+  demoVideo?: string;
   level: "Beginner" | "Intermediate" | "Advanced";
   description: string;
   outline: Module[];
@@ -113,6 +114,7 @@ export const COURSES: Course[] = [
     students: 15200,
     price: "PKR 15,000",
     image: "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?auto=format&fit=crop&q=80&w=800&h=500",
+    demoVideo: "https://www.youtube.com/embed/8Do2nBFzir4",
     level: "Intermediate",
     description: "This course covers the entire O Level Mathematics syllabus (4024). From basic algebra to advanced trigonometry and statistics, Waleed Anwar guides you through every concept with past paper practice from the last 20 years.",
     outline: [
@@ -131,6 +133,7 @@ export const COURSES: Course[] = [
     students: 8400,
     price: "PKR 18,000",
     image: "https://images.unsplash.com/photo-1614935151651-0bea6508db6b?auto=format&fit=crop&q=80&w=800&h=500",
+    demoVideo: "https://www.youtube.com/embed/IyNPqsdVbF4",
     level: "Advanced",
     description: "Master the complexities of A Level Physics with Zain Qamar. This course focuses on deep conceptual understanding of mechanics, fields, and particle physics, with a special module dedicated to A-Level Practical Skills (Paper 3 & 5).",
     outline: [
@@ -149,6 +152,7 @@ export const COURSES: Course[] = [
     students: 12500,
     price: "PKR 12,000",
     image: "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&q=80&w=800&h=500",
+    demoVideo: "https://www.youtube.com/embed/7j8RYwqPVmE",
     level: "Intermediate",
     description: "Designed for both IGCSE students and IELTS aspirants. Sijra teaches you the art of high-impact writing, sophisticated vocabulary, and critical listening skills required to excel in international English examinations.",
     outline: [
@@ -166,6 +170,7 @@ export const COURSES: Course[] = [
     students: 4200,
     price: "PKR 10,000",
     image: "https://images.unsplash.com/photo-1527631746610-bca00a040d60?auto=format&fit=crop&q=80&w=800&h=500",
+    demoVideo: "https://www.youtube.com/embed/K5q0k1a0cP4",
     level: "Beginner",
     description: "Start your journey towards studying in Germany. Hans Muller teaches the basics of German grammar, greetings, and daily conversations, specifically tailored for students planning to move to Germany for higher education.",
     outline: [
@@ -183,6 +188,7 @@ export const COURSES: Course[] = [
     students: 6800,
     price: "PKR 14,000",
     image: "https://images.unsplash.com/photo-1576091160550-112173f7f869?auto=format&fit=crop&q=80&w=800&h=500",
+    demoVideo: "https://www.youtube.com/embed/5eXH66kRrQE",
     level: "Intermediate",
     description: "Master Chemistry O Level with Kashif Ismail. From atomic structure to organic chemistry, this comprehensive course uses visual learning and practical demonstrations to make complex concepts simple.",
     outline: [
@@ -198,6 +204,7 @@ export const COURSES: Course[] = [
     category: "Languages",
     instructorId: "uzma-siraj",
     rating: 4.9,
+    demoVideo: "https://www.youtube.com/embed/dQw4w9WgXcQ",
     students: 5600,
     price: "PKR 13,000",
     image: "https://images.unsplash.com/photo-1507842217343-583f7270bfba?auto=format&fit=crop&q=80&w=800&h=500",
@@ -218,12 +225,104 @@ export const COURSES: Course[] = [
     students: 9200,
     price: "PKR 16,000",
     image: "https://images.unsplash.com/photo-1453847585129-71efb826e8c1?auto=format&fit=crop&q=80&w=800&h=500",
+    demoVideo: "https://www.youtube.com/embed/r3xp9G3aHZQ",
     level: "Advanced",
     description: "Progress to A Level Mathematics with Waleed Anwar's proven 'Waleed Method'. This course covers pure mathematics, mechanics, and statistics with extensive past paper solutions from CIE.",
     outline: [
       { title: "Pure Mathematics 1", duration: "14 hours", lessons: ["Complex Numbers", "Polynomials", "Series & Sequences", "Differentiation & Integration"] },
       { title: "Pure Mathematics 2", duration: "12 hours", lessons: ["Trigonometric Functions", "Logarithms & Exponentials", "Vectors", "Calculus Applications"] },
       { title: "Mechanics & Statistics", duration: "10 hours", lessons: ["Forces & Motion", "Probability Distributions", "Hypothesis Testing", "Regression"] },
+    ],
+  },
+  {
+    id: "biology-o-level",
+    title: "Biology O Level (5090) — Life Sciences Complete",
+    category: "Science",
+    instructorId: "zain-qamar",
+    rating: 4.9,
+    students: 7100,
+    price: "PKR 14,500",
+    image: "https://images.unsplash.com/photo-1530587191325-3db32d826c18?auto=format&fit=crop&q=80&w=800&h=500",
+    demoVideo: "https://www.youtube.com/embed/g8z8DUqYXiI",
+    level: "Intermediate",
+    description: "Comprehensive Biology O Level course covering cells, genetics, ecology, and human physiology. Expert-led with real lab demonstrations and past paper mastery.",
+    outline: [
+      { title: "Cell Biology & Microscopy", duration: "8 hours", lessons: ["Cell Structure", "Organelles", "Cellular Transport", "Microscope Use"] },
+      { title: "Genetics & Evolution", duration: "10 hours", lessons: ["DNA & Genes", "Inheritance Patterns", "Evolution", "Natural Selection"] },
+      { title: "Ecology & Plant Biology", duration: "9 hours", lessons: ["Ecosystems", "Food Chains", "Photosynthesis", "Plant Transport"] },
+      { title: "Human Body Systems", duration: "8 hours", lessons: ["Respiration", "Circulation", "Digestion", "Excretion"] },
+    ],
+  },
+  {
+    id: "islamic-studies",
+    title: "Islamic Studies O Level (2011) — Mastery Program",
+    category: "Social Studies",
+    instructorId: "uzma-siraj",
+    rating: 4.8,
+    students: 5600,
+    price: "PKR 11,500",
+    image: "https://images.unsplash.com/photo-1516214104703-d870798883c5?auto=format&fit=crop&q=80&w=800&h=500",
+    demoVideo: "https://www.youtube.com/embed/9_fK-ViKlnQ",
+    level: "Intermediate",
+    description: "Detailed Islamic Studies O Level course covering Islamic beliefs, practices, history, and ethics with scholarly depth and contemporary relevance.",
+    outline: [
+      { title: "Islamic Beliefs & Practices", duration: "9 hours", lessons: ["Tawheed", "The Five Pillars", "Prophet Muhammad", "The Qur'an"] },
+      { title: "Islamic History", duration: "10 hours", lessons: ["Early Islamic State", "Golden Age", "Ottoman Empire", "Modern Islam"] },
+      { title: "Islamic Law & Ethics", duration: "8 hours", lessons: ["Shariah Principles", "Islamic Finance", "Medical Ethics", "Social Justice"] },
+    ],
+  },
+  {
+    id: "english-literature-a-level",
+    title: "English Literature A Level (9093) — Textual Analysis",
+    category: "Languages",
+    instructorId: "sijra-teacher",
+    rating: 4.9,
+    students: 8900,
+    price: "PKR 15,000",
+    image: "https://images.unsplash.com/photo-1507842217343-583f7270bfba?auto=format&fit=crop&q=80&w=800&h=500",
+    demoVideo: "https://www.youtube.com/embed/r8EHx8DkMPQ",
+    level: "Advanced",
+    description: "Master A Level English Literature with deep textual analysis, critical perspectives, and essay writing excellence. Study Shakespeare, poetry, and contemporary works.",
+    outline: [
+      { title: "Shakespeare Studies", duration: "12 hours", lessons: ["Hamlet", "Macbeth", "Character Analysis", "Dramatic Techniques"] },
+      { title: "Poetry Analysis", duration: "10 hours", lessons: ["Romantic Poetry", "Modern Poetry", "Form & Structure", "Critical Interpretation"] },
+      { title: "Prose & Essays", duration: "9 hours", lessons: ["Novel Analysis", "Critical Reading", "Essay Structure", "Academic Writing"] },
+    ],
+  },
+  {
+    id: "commerce-o-level",
+    title: "Commerce O Level (7100) — Business Fundamentals",
+    category: "Business",
+    instructorId: "waleed-anwar",
+    rating: 4.7,
+    students: 4500,
+    price: "PKR 12,000",
+    image: "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80&w=800&h=500",
+    demoVideo: "https://www.youtube.com/embed/7j8RYwqPVmE",
+    level: "Intermediate",
+    description: "Complete Commerce O Level covering business organization, accounting principles, economics, and trade. Real-world case studies and practical applications included.",
+    outline: [
+      { title: "Business Organization", duration: "8 hours", lessons: ["Business Types", "Ownership", "Sole Traders", "Partnerships & Companies"] },
+      { title: "Accounting Basics", duration: "10 hours", lessons: ["Double Entry", "Trial Balance", "Profit & Loss", "Balance Sheet"] },
+      { title: "Economics & Trade", duration: "9 hours", lessons: ["Supply & Demand", "Money", "International Trade", "Banking"] },
+    ],
+  },
+  {
+    id: "french-beginner",
+    title: "French A1: Beginner's Gateway",
+    category: "Languages",
+    instructorId: "hans-muller",
+    rating: 4.6,
+    students: 3200,
+    price: "PKR 9,500",
+    image: "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80&w=800&h=500",
+    demoVideo: "https://www.youtube.com/embed/TJ7uuD8lF-I",
+    level: "Beginner",
+    description: "Start learning French from scratch. Perfect for those planning European studies or looking to add a Romance language to their skillset.",
+    outline: [
+      { title: "Fundamentals", duration: "6 hours", lessons: ["Pronunciation", "Basic Greetings", "Numbers", "Days & Months"] },
+      { title: "Essential Grammar", duration: "10 hours", lessons: ["Verbs", "Adjectives", "Sentence Structure", "Question Formation"] },
+      { title: "Practical Communication", duration: "8 hours", lessons: ["Ordering Food", "Directions", "Shopping", "Hotel Check-in"] },
     ],
   },
 ];

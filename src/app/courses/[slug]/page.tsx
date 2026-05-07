@@ -152,6 +152,23 @@ const CourseDetailPage = () => {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-16">
             <div className="lg:col-span-2 space-y-16">
               
+              {/* Demo Video */}
+              {course.demoVideo && (
+                <div>
+                  <h2 className="text-3xl font-black text-gray-900 mb-8 tracking-tight">Preview Course Content</h2>
+                  <div className="relative w-full aspect-video rounded-3xl overflow-hidden shadow-2xl border-4 border-gray-100 bg-gray-900">
+                    <iframe
+                      className="w-full h-full"
+                      src={course.demoVideo}
+                      title="Course Demo"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                    />
+                  </div>
+                  <p className="text-gray-500 mt-4 text-sm">Watch this preview to get a taste of the course content and teaching style.</p>
+                </div>
+              )}
+
               {/* Outline */}
               <div>
                 <h2 className="text-3xl font-black text-gray-900 mb-10 tracking-tight">Course Outline</h2>
