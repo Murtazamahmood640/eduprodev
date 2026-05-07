@@ -52,7 +52,7 @@ export const DashboardNavbar = () => {
           </Link>
 
           {/* Center - Icon Navigation (Desktop) */}
-          <nav className="hidden md:flex items-center gap-1">
+          <nav className="hidden md:flex items-center gap-2">
             {navItems.map(({ label, href, icon: Icon }) => {
               const active = isActive(href);
               return (
@@ -60,34 +60,21 @@ export const DashboardNavbar = () => {
                   <motion.div
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
-                    className={`relative p-2.5 rounded-lg transition-all group`}
-                    title={label}
+                    className={`flex items-center gap-2 px-3.5 py-2 rounded-lg transition-all group ${
+                      active
+                        ? 'bg-primary/10 text-primary'
+                        : 'text-gray-600 hover:bg-gray-100 hover:text-primary'
+                    }`}
                   >
-                    <Icon
-                      className={`w-5 h-5 transition-colors ${
-                        active
-                          ? 'text-primary'
-                          : 'text-gray-400 group-hover:text-primary'
-                      }`}
-                    />
+                    <Icon className="w-4.5 h-4.5" />
+                    <span className="text-xs font-bold uppercase tracking-wider hidden lg:inline">{label}</span>
                     {active && (
                       <motion.div
                         layoutId="navUnderline"
-                        className="absolute bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 bg-primary rounded-full"
+                        className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-primary to-primary-600 rounded-full"
                         transition={{ type: 'spring', stiffness: 380, damping: 40 }}
                       />
                     )}
-
-                    {/* Tooltip */}
-                    <motion.div
-                      initial={{ opacity: 0, y: 8, scale: 0.95 }}
-                      whileHover={{ opacity: 1, y: 0, scale: 1 }}
-                      transition={{ duration: 0.2 }}
-                      className="absolute top-full mt-3 left-1/2 -translate-x-1/2 bg-gradient-to-r from-gray-900 to-gray-800 text-white text-xs font-bold px-3 py-2 rounded-lg whitespace-nowrap pointer-events-none shadow-lg border border-gray-700 z-50"
-                    >
-                      {label}
-                      <div className="absolute -top-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-gray-900 rotate-45" />
-                    </motion.div>
                   </motion.div>
                 </Link>
               );

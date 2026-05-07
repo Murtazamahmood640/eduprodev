@@ -66,12 +66,12 @@ export default function LearnPage() {
   const progress = Math.round((totalDone / total) * 100);
 
   return (
-    <div className="min-h-screen flex flex-col bg-slate-50 p-4 md:p-6 lg:p-8">
+    <div className="min-h-screen flex flex-col bg-gradient-to-br from-slate-50 via-white to-slate-50 p-4 md:p-6 lg:p-8">
 
         {/* Top Bar */}
-        <div className="flex flex-wrap gap-4 items-center justify-between px-6 py-4 bg-white border-b border-slate-200 flex-shrink-0 z-10 shadow-sm">
+        <div className="flex flex-wrap gap-4 items-center justify-between px-6 py-4 bg-white/80 backdrop-blur-xl border border-slate-100 flex-shrink-0 z-10 shadow-sm rounded-2xl mb-6">
           <div className="flex items-center gap-4 flex-wrap">
-            <Link href="/student/dashboard" className="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center text-slate-500 hover:bg-slate-200 transition-colors">
+            <Link href="/student/dashboard" className="w-10 h-10 rounded-full bg-gradient-to-br from-edu-indigo/10 to-blue-100 flex items-center justify-center text-edu-indigo hover:from-edu-indigo/20 hover:to-blue-200 transition-colors">
               <ChevronDown className="w-5 h-5 rotate-90" />
             </Link>
             <div>
@@ -99,11 +99,11 @@ export default function LearnPage() {
           </div>
         </div>
 
-      <div className="flex-1 flex overflow-hidden">
+      <div className="flex-1 flex overflow-hidden gap-6">
         {/* Main Content Area */}
         <div className="flex-1 flex flex-col overflow-y-auto">
           {/* Video Player Area */}
-          <div className="bg-slate-900 relative overflow-hidden group aspect-video">
+          <div className="bg-gradient-to-br from-slate-900 to-slate-800 relative overflow-hidden group aspect-video rounded-2xl shadow-2xl border border-white/10">
             <div className="absolute inset-0 bg-gradient-to-tr from-slate-900 via-slate-800 to-edu-indigo/20 opacity-80" />
             <img src="https://images.unsplash.com/photo-1561070791-2526d30994b5?auto=format&fit=crop&q=80&w=1200&h=675" alt="Video cover" className="w-full h-full object-cover mix-blend-overlay opacity-40" />
             
@@ -127,8 +127,8 @@ export default function LearnPage() {
           </div>
 
           {/* Tabs & Content */}
-          <div className="flex-1 bg-white">
-            <div className="flex items-center gap-8 px-8 border-b border-slate-200">
+          <div className="flex-1 bg-white/80 backdrop-blur-sm rounded-2xl mt-6 shadow-xl border border-slate-100 overflow-hidden flex flex-col">
+            <div className="flex items-center gap-1 px-6 border-b border-slate-100 bg-gradient-to-r from-slate-50 to-white">
               {[
                 { id: "overview", label: "Overview", icon: BookOpen },
                 { id: "notes", label: "My Notes", icon: FileText },
@@ -138,11 +138,14 @@ export default function LearnPage() {
                 <button
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id)}
-                  className={`flex items-center gap-2 py-4 border-b-2 font-bold text-sm transition-colors ${
-                    activeTab === tab.id ? "border-edu-indigo text-edu-indigo" : "border-transparent text-slate-500 hover:text-slate-800"
+                  className={`flex items-center gap-2 px-6 py-4 font-bold text-sm transition-all relative group ${
+                    activeTab === tab.id ? "text-edu-indigo" : "text-slate-600 hover:text-slate-900"
                   }`}
                 >
                   <tab.icon className="w-4 h-4" /> {tab.label}
+                  {activeTab === tab.id && (
+                    <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-edu-indigo to-blue-500" />
+                  )}
                 </button>
               ))}
             </div>
