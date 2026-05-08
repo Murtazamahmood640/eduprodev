@@ -21,7 +21,6 @@ export const metadata: Metadata = {
 import AnimatedBackground from "@/components/ui/AnimatedBackground";
 import CustomCursor from "@/components/ui/CustomCursor";
 import { AnimatedGradientMesh } from "@/components/backgrounds/AnimatedGradientMesh";
-import { FloatingParticles } from "@/components/backgrounds/FloatingParticles";
 import { EducationThemeBackground } from "@/components/backgrounds/EducationThemeBackground";
 
 export default function RootLayout({
@@ -34,7 +33,6 @@ export default function RootLayout({
       <body className={`${inter.variable} ${poppins.variable} font-sans antialiased text-edu-slate-900 selection:bg-edu-indigo/20 selection:text-edu-indigo bg-white relative`}>
         <CustomCursor />
         <AnimatedGradientMesh />
-        <FloatingParticles />
         <EducationThemeBackground />
         <AnimatedBackground />
         {children}

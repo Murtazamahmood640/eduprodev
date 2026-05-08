@@ -1,8 +1,9 @@
 "use client";
 
 import React, { useState } from "react";
-import { Users, Search, BookOpen, TrendingUp, Star, Filter, Sparkles, MoreVertical, ArrowRight } from "lucide-react";
+import { Users, Search, BookOpen, TrendingUp, Star, Filter, Sparkles, MoreVertical, ArrowRight, Plus } from "lucide-react";
 import { motion } from "framer-motion";
+import SlideOverlay from "@/components/ui/SlideOverlay";
 
 const students = [
   { id: 1, name: "Ahmed Raza", email: "ahmed@example.com", course: "Mathematics O Level", progress: 85, quizScore: 88, enrolled: "May 1, 2026", avatar: "A", status: "Active" },
@@ -22,6 +23,8 @@ const statusStyles: Record<string, string> = {
 export default function TeacherStudents() {
   const [search, setSearch] = useState("");
   const [courseFilter, setCourseFilter] = useState("All");
+  const [isFormOpen, setIsFormOpen] = useState(false);
+  const [formData, setFormData] = useState({ name: "", email: "", course: "" });
 
   const courses = ["All", "Mathematics O Level", "Physics A Level", "English Mastery"];
   const filtered = students.filter((s) => {
@@ -43,6 +46,14 @@ export default function TeacherStudents() {
             </p>
           </div>
         </div>
+        <motion.button
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          onClick={() => setIsFormOpen(true)}
+          className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-primary to-primary-600 text-white font-bold rounded-xl shadow-lg shadow-primary/30 hover:shadow-xl transition-all"
+        >
+          <Plus className="w-5 h-5" /> Add Student
+        </motion.button>
       </div>
 
       {/* ── Summary Matrix ── */}
@@ -68,8 +79,8 @@ export default function TeacherStudents() {
       </div>
 
       {/* ── Search & Navigation ── */}
-      <div className="flex flex-col lg:flex-row gap-4 items-center justify-between border-b border-gray-100 pb-8">
-        <div className="relative w-full lg:max-w-md">
+      <div className="space-y-4 border-b border-gray-100 pb-8">
+        <div className="relative w-full">
           <Search className="absolute left-5 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5" />
           <input 
             value={search} 
@@ -78,19 +89,27 @@ export default function TeacherStudents() {
             className="w-full pl-14 pr-6 py-4 bg-gray-50 border border-gray-100 rounded-2xl text-sm font-bold focus:outline-none focus:ring-8 focus:ring-primary/5 focus:border-primary transition-all" 
           />
         </div>
-        <div className="flex items-center gap-3 overflow-x-auto pb-2 w-full lg:w-auto">
-          <div className="flex items-center gap-2 px-4 py-2 border-r border-gray-100 mr-2">
+        <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 px-3 py-1">
             <Filter className="w-4 h-4 text-gray-400" />
-            <span className="text-[9px] font-black text-gray-400 uppercase tracking-widest">Modules</span>
+            <span className="text-[9px] font-black text-gray-400 uppercase tracking-widest">Filter</span>
           </div>
+        </div>
+        <div className="flex flex-wrap gap-2">
           {courses.map((c) => (
-            <button 
-              key={c} 
+            <motion.button 
+              key={c}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
               onClick={() => setCourseFilter(c)}
-              className={`px-6 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all whitespace-nowrap ${courseFilter === c ? "bg-primary text-white shadow-xl shadow-primary/20" : "bg-white border border-gray-100 text-gray-400 hover:bg-gray-50"}`}
+              className={`px-4 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all whitespace-nowrap border-2 ${
+                courseFilter === c 
+                  ? "bg-gradient-to-r from-primary to-primary-600 text-white border-primary shadow-lg shadow-primary/30" 
+                  : "bg-white border-gray-200 text-gray-600 hover:border-primary/30 hover:bg-gray-50"
+              }`}
             >
               {c === "All" ? "Full Registry" : c}
-            </button>
+            </motion.button>
           ))}
         </div>
       </div>
@@ -157,6 +176,67 @@ export default function TeacherStudents() {
           </div>
         )}
       </div>
+
+      {/* ── Add Student Form ── */}
+      <SlideOverlay
+        isOpen={isFormOpen}
+        onClose={() => setIsFormOpen(false)}
+        title="Add Student"
+        subtitle="Register a new student to your course"
+      >
+        <div className="space-y-6">
+          <div>
+            <label className="block text-sm font-bold text-gray-900 mb-2">Full Name</label>
+            <input
+              type="text"
+              placeholder="Enter student name"
+              value={formData.name}
+              onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+              className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-4 focus:ring-primary/20 focus:border-primary transition-all"
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm font-bold text-gray-900 mb-2">Email Address</label>
+            <input
+              type="email"
+              placeholder="student@example.com"
+              value={formData.email}
+              onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+              className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-4 focus:ring-primary/20 focus:border-primary transition-all"
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm font-bold text-gray-900 mb-2">Select Course</label>
+            <select
+              value={formData.course}
+              onChange={(e) => setFormData({ ...formData, course: e.target.value })}
+              className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-4 focus:ring-primary/20 focus:border-primary transition-all appearance-none"
+            >
+              <option value="">Choose a course...</option>
+              {["Mathematics O Level", "Physics A Level", "English Mastery"].map((c) => (
+                <option key={c} value={c}>{c}</option>
+              ))}
+            </select>
+          </div>
+
+          <motion.button
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            className="w-full py-3 bg-gradient-to-r from-primary to-primary-600 text-white font-bold rounded-xl shadow-lg shadow-primary/30 hover:shadow-xl transition-all mt-8"
+          >
+            Add Student
+          </motion.button>
+
+          <button
+            onClick={() => setIsFormOpen(false)}
+            className="w-full py-3 bg-gray-100 text-gray-700 font-bold rounded-xl hover:bg-gray-200 transition-all"
+          >
+            Cancel
+          </button>
+        </div>
+      </SlideOverlay>
     </div>
   );
 }

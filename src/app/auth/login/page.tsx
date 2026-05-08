@@ -5,12 +5,12 @@ import Link from "next/link";
 import { 
   GraduationCap, Mail, Lock, Eye, EyeOff, 
   Github, ArrowRight, BookOpen, Users, 
-  Sparkles, CheckCircle2 
+  Sparkles, CheckCircle2, Shield
 } from "lucide-react";
 import { motion } from "framer-motion";
 
 export default function LoginPage() {
-  const [role, setRole] = useState<"student" | "teacher">("student");
+  const [role, setRole] = useState<"student" | "teacher" | "admin">("student");
   const [showPassword, setShowPassword] = useState(false);
 
   return (
@@ -87,18 +87,24 @@ export default function LoginPage() {
           </header>
 
           {/* Role Selector */}
-          <div className="flex bg-gray-50 rounded-xl p-1.5 mb-8 border border-gray-100">
-            {(["student", "teacher"] as const).map((r) => (
+          <div className="grid grid-cols-3 gap-2 mb-8">
+            {(["student", "teacher", "admin"] as const).map((r) => (
               <button
                 key={r}
                 onClick={() => setRole(r)}
-                className={`flex-1 flex items-center justify-center gap-2 py-3.5 rounded-lg font-black text-[10px] uppercase tracking-widest transition-all ${
+                className={`flex flex-col items-center justify-center gap-2 py-3.5 px-2 rounded-xl font-black text-[9px] uppercase tracking-widest transition-all border-2 ${
                   role === r
-                    ? "bg-white text-primary shadow-sm border border-gray-100"
-                    : "text-gray-400 hover:text-gray-600"
+                    ? "bg-gradient-to-br from-primary to-primary-600 text-white border-primary shadow-lg shadow-primary/30"
+                    : "bg-gray-50 text-gray-600 border-gray-200 hover:border-primary/30 hover:bg-gray-100"
                 }`}
               >
-                {r === "student" ? <BookOpen className="w-3.5 h-3.5" /> : <Users className="w-3.5 h-3.5" />}
+                {r === "student" ? (
+                  <BookOpen className="w-4 h-4" />
+                ) : r === "teacher" ? (
+                  <Users className="w-4 h-4" />
+                ) : (
+                  <Shield className="w-4 h-4" />
+                )}
                 <span>{r}</span>
               </button>
             ))}
@@ -136,10 +142,14 @@ export default function LoginPage() {
             </div>
 
             <Link
-              href={role === "student" ? "/student/dashboard" : "/teacher/dashboard"}
-              className="w-full flex items-center justify-center gap-3 bg-primary text-white py-4 rounded-xl font-black text-[10px] uppercase tracking-[0.2em] hover:bg-primary-600 transition-all active:scale-[0.98] shadow-xl shadow-primary/20 group mt-4"
+              href={
+                role === "student" ? "/student/dashboard" : 
+                role === "teacher" ? "/teacher/dashboard" : 
+                "/admin/dashboard"
+              }
+              className="w-full flex items-center justify-center gap-3 bg-gradient-to-r from-primary to-primary-600 text-white py-4 rounded-xl font-black text-[10px] uppercase tracking-[0.2em] hover:shadow-xl hover:shadow-primary/30 transition-all active:scale-[0.98] shadow-lg shadow-primary/20 group mt-4"
             >
-              Enter Portal
+              Enter {role === "admin" ? "Admin" : role.charAt(0).toUpperCase() + role.slice(1)} Portal
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </Link>
           </form>

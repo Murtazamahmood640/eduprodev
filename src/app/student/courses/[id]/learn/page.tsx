@@ -66,12 +66,12 @@ export default function LearnPage() {
   const progress = Math.round((totalDone / total) * 100);
 
   return (
-    <div className="min-h-screen flex flex-col bg-slate-50 p-4 md:p-6 lg:p-8">
+    <div className="min-h-screen flex flex-col bg-gradient-to-br from-slate-50 via-white to-slate-50 p-4 md:p-6 lg:p-8">
 
         {/* Top Bar */}
-        <div className="flex flex-wrap gap-4 items-center justify-between px-6 py-4 bg-white border-b border-slate-200 flex-shrink-0 z-10 shadow-sm">
+        <div className="flex flex-wrap gap-4 items-center justify-between px-6 py-4 bg-white/80 backdrop-blur-xl border border-slate-100 flex-shrink-0 z-10 shadow-sm rounded-2xl mb-6">
           <div className="flex items-center gap-4 flex-wrap">
-            <Link href="/student/dashboard" className="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center text-slate-500 hover:bg-slate-200 transition-colors">
+            <Link href="/student/dashboard" className="w-10 h-10 rounded-full bg-gradient-to-br from-edu-indigo/10 to-blue-100 flex items-center justify-center text-edu-indigo hover:from-edu-indigo/20 hover:to-blue-200 transition-colors">
               <ChevronDown className="w-5 h-5 rotate-90" />
             </Link>
             <div>
@@ -99,11 +99,11 @@ export default function LearnPage() {
           </div>
         </div>
 
-      <div className="flex-1 flex overflow-hidden">
+      <div className="flex-1 flex overflow-hidden gap-6">
         {/* Main Content Area */}
         <div className="flex-1 flex flex-col overflow-y-auto">
           {/* Video Player Area */}
-          <div className="bg-slate-900 relative overflow-hidden group aspect-video">
+          <div className="bg-gradient-to-br from-slate-900 to-slate-800 relative overflow-hidden group aspect-video rounded-2xl shadow-2xl border border-white/10">
             <div className="absolute inset-0 bg-gradient-to-tr from-slate-900 via-slate-800 to-edu-indigo/20 opacity-80" />
             <img src="https://images.unsplash.com/photo-1561070791-2526d30994b5?auto=format&fit=crop&q=80&w=1200&h=675" alt="Video cover" className="w-full h-full object-cover mix-blend-overlay opacity-40" />
             
@@ -127,8 +127,8 @@ export default function LearnPage() {
           </div>
 
           {/* Tabs & Content */}
-          <div className="flex-1 bg-white">
-            <div className="flex items-center gap-8 px-8 border-b border-slate-200">
+          <div className="flex-1 bg-white/80 backdrop-blur-sm rounded-2xl mt-6 shadow-xl border border-slate-100 overflow-hidden flex flex-col">
+            <div className="flex items-center gap-1 px-6 border-b border-slate-100 bg-gradient-to-r from-slate-50 to-white">
               {[
                 { id: "overview", label: "Overview", icon: BookOpen },
                 { id: "notes", label: "My Notes", icon: FileText },
@@ -138,11 +138,14 @@ export default function LearnPage() {
                 <button
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id)}
-                  className={`flex items-center gap-2 py-4 border-b-2 font-bold text-sm transition-colors ${
-                    activeTab === tab.id ? "border-edu-indigo text-edu-indigo" : "border-transparent text-slate-500 hover:text-slate-800"
+                  className={`flex items-center gap-2 px-6 py-4 font-bold text-sm transition-all relative group ${
+                    activeTab === tab.id ? "text-edu-indigo" : "text-slate-600 hover:text-slate-900"
                   }`}
                 >
                   <tab.icon className="w-4 h-4" /> {tab.label}
+                  {activeTab === tab.id && (
+                    <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-edu-indigo to-blue-500" />
+                  )}
                 </button>
               ))}
             </div>
@@ -238,30 +241,35 @@ export default function LearnPage() {
           
           <div className="flex-1 overflow-y-auto">
             {curriculum.map((section, si) => (
-              <div key={si} className="border-b border-slate-100 last:border-0">
+              <div key={si} className="border-b-2 border-slate-100 last:border-0 overflow-hidden">
                 <button
                   onClick={() => setOpenSection(openSection === si ? -1 : si)}
-                  className="w-full flex items-center justify-between px-6 py-4 text-left hover:bg-slate-50 transition-colors group"
+                  className="w-full flex items-center justify-between px-6 py-5 text-left hover:bg-gradient-to-r hover:from-edu-indigo/5 hover:to-white transition-all group"
                 >
-                  <div>
-                    <p className="text-sm font-bold text-slate-900 group-hover:text-edu-indigo transition-colors">{section.section}</p>
-                    <p className="text-xs text-slate-400 mt-0.5">{section.lessons.length} lessons</p>
+                  <div className="flex-1">
+                    <p className="text-sm font-bold text-slate-900 group-hover:text-edu-indigo transition-colors flex items-center gap-2">
+                      <span className="flex items-center justify-center w-6 h-6 rounded-md bg-slate-100 text-xs font-black text-slate-600 group-hover:bg-edu-indigo group-hover:text-white transition-all">
+                        {si + 1}
+                      </span>
+                      {section.section}
+                    </p>
+                    <p className="text-xs text-slate-400 mt-1 ml-8">{section.lessons.length} lessons</p>
                   </div>
-                  <div className={`p-1.5 rounded-lg transition-colors ${openSection === si ? "bg-indigo-50 text-edu-indigo" : "bg-slate-100 text-slate-400 group-hover:bg-slate-200"}`}>
+                  <div className={`p-2 rounded-lg transition-all ${openSection === si ? "bg-edu-indigo/20 text-edu-indigo" : "bg-slate-100 text-slate-400 group-hover:bg-slate-200"}`}>
                     {openSection === si ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
                   </div>
                 </button>
 
                 {openSection === si && (
-                  <div className="pb-3 bg-slate-50/30">
+                  <div className="pb-3 bg-gradient-to-b from-slate-50/50 to-white space-y-1">
                     {section.lessons.map((lesson, li) => (
                       <div
                         key={li}
-                        className={`flex items-start gap-4 px-6 py-3 cursor-pointer transition-all relative ${
-                          lesson.active ? "bg-white border-y border-slate-100 shadow-sm z-10" : "hover:bg-white"
+                        className={`flex items-start gap-3 px-6 py-4 cursor-pointer transition-all mx-3 rounded-xl relative group/lesson ${
+                          lesson.active ? "bg-white border-2 border-edu-indigo shadow-md" : "hover:bg-white border-2 border-transparent hover:border-slate-100"
                         } ${lesson.locked ? "opacity-50 cursor-not-allowed" : ""}`}
                       >
-                        {lesson.active && <div className="absolute left-0 top-0 bottom-0 w-1 bg-edu-indigo" />}
+                        {lesson.active && <div className="absolute left-0 top-0 bottom-0 w-1.5 bg-edu-indigo rounded-r-lg" />}
                         
                         <div className="flex-shrink-0 mt-0.5">
                           {lesson.locked ? (
@@ -269,14 +277,14 @@ export default function LearnPage() {
                           ) : lesson.done ? (
                             <CheckCircle className="w-4 h-4 text-emerald-500" />
                           ) : (
-                            <PlayCircle className={`w-4 h-4 ${lesson.active ? "text-edu-indigo" : "text-slate-300"}`} />
+                            <PlayCircle className={`w-4 h-4 transition-colors ${lesson.active ? "text-edu-indigo" : "text-slate-300 group-hover/lesson:text-edu-indigo"}`} />
                           )}
                         </div>
                         <div className="flex-1 min-w-0">
-                          <p className={`text-sm leading-snug mb-1 ${lesson.active ? "text-edu-indigo font-bold" : lesson.done ? "text-slate-500" : "text-slate-700 font-medium"}`}>
+                          <p className={`text-sm leading-snug mb-1.5 transition-all ${lesson.active ? "text-edu-indigo font-bold" : lesson.done ? "text-slate-500" : "text-slate-700 font-medium group-hover/lesson:text-slate-900"}`}>
                             {lesson.title}
                           </p>
-                          <div className="flex items-center gap-1.5 text-xs text-slate-400">
+                          <div className="flex items-center gap-1.5 text-xs text-slate-400 group-hover/lesson:text-slate-500 transition-colors">
                             <Clock className="w-3 h-3" /> {lesson.duration}
                           </div>
                         </div>

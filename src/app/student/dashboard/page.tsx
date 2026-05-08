@@ -80,31 +80,40 @@ export default function StudentDashboard() {
 
       {/* ── Summary Matrix ── */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
-        {stats.map((stat, i) => (
-          <motion.div
-            key={i}
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: i * 0.1 }}
-            whileHover={{ y: -4, scale: 1.02 }}
-            className="bg-white border border-gray-100 rounded-2xl p-8 hover:shadow-2xl hover:shadow-primary/15 hover:border-primary/40 transition-all group relative overflow-hidden"
-          >
-            {/* Gradient border on hover */}
-            <div className="absolute -inset-0.5 bg-gradient-to-br from-primary/0 via-primary/0 to-primary/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
-            
-            <div className="relative z-10">
-              <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-6 shadow-md group-hover:shadow-lg group-hover:scale-110 transition-all bg-gradient-to-br from-primary-50 to-primary-100 text-primary border border-primary-200`}>
-                <stat.icon className="w-6 h-6" />
+        {stats.map((stat, i) => {
+          const gradients = [
+            "from-primary to-primary-600",
+            "from-emerald-500 to-teal-600",
+            "from-amber-500 to-orange-600",
+            "from-violet-500 to-purple-600"
+          ];
+          const gradient = gradients[i % gradients.length];
+          
+          return (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: i * 0.1 }}
+              whileHover={{ y: -6, scale: 1.04 }}
+              className={`relative bg-gradient-to-br ${gradient} rounded-2xl p-8 border border-white/20 hover:shadow-2xl transition-all group overflow-hidden`}
+            >
+              <div className="absolute inset-0 bg-white/5 group-hover:bg-white/10 transition-colors" />
+              
+              <div className="relative z-10">
+                <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-6 shadow-lg bg-white/20 group-hover:bg-white/30 group-hover:scale-110 transition-all">
+                  <stat.icon className="w-6 h-6 text-white" />
+                </div>
+                <p className="text-4xl font-black text-white tracking-tight mb-1 group-hover:text-white">{stat.value}</p>
+                <p className="text-[10px] font-black text-white/70 uppercase tracking-widest mb-4">{stat.label}</p>
+                <div className="flex items-center gap-2 text-[9px] font-black text-white uppercase tracking-[0.2em] bg-white/20 w-fit px-3 py-1.5 rounded-lg border border-white/30 group-hover:border-white/50 transition-colors">
+                  <Zap className="w-3 h-3 fill-white" />
+                  {stat.sub}
+                </div>
               </div>
-              <p className="text-3xl font-black text-gray-900 tracking-tight mb-1 group-hover:text-primary transition-colors">{stat.value}</p>
-              <p className="text-[10px] font-black text-gray-500 uppercase tracking-widest mb-4">{stat.label}</p>
-              <div className="flex items-center gap-2 text-[9px] font-black text-primary uppercase tracking-[0.2em] bg-gradient-to-r from-primary-50 to-blue-50 w-fit px-3 py-1.5 rounded-lg border border-primary-200 group-hover:border-primary-400 transition-colors">
-                <Zap className="w-3 h-3 fill-primary" />
-                {stat.sub}
-              </div>
-            </div>
-          </motion.div>
-        ))}
+            </motion.div>
+          );
+        })}
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
@@ -117,20 +126,28 @@ export default function StudentDashboard() {
             </Link>
           </div>
           <div className="grid grid-cols-1 gap-4">
-            {enrolledCourses.map((course, i) => (
+            {enrolledCourses.map((course, i) => {
+              const gradients = [
+                { bg: "from-primary to-primary-600", icon: "text-primary", light: "from-primary-50 to-primary-100", border: "border-primary-200" },
+                { bg: "from-emerald-500 to-teal-600", icon: "text-emerald-500", light: "from-emerald-50 to-teal-50", border: "border-emerald-200" },
+                { bg: "from-amber-500 to-orange-600", icon: "text-amber-500", light: "from-amber-50 to-orange-50", border: "border-amber-200" },
+              ];
+              const gradient = gradients[i % gradients.length];
+              
+              return (
               <motion.div
                 key={i}
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.4 + i * 0.1 }}
-                whileHover={{ y: -2, scale: 1.01 }}
+                whileHover={{ y: -4, scale: 1.02 }}
                 className="bg-white border border-gray-100 rounded-2xl p-8 flex flex-col md:flex-row items-center gap-8 hover:border-primary/40 hover:shadow-2xl hover:shadow-primary/15 transition-all group relative overflow-hidden"
               >
                 {/* Gradient border on hover */}
                 <div className="absolute -inset-0.5 bg-gradient-to-r from-primary/0 via-primary/5 to-primary/0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
                 
-                <div className="w-16 h-16 bg-gradient-to-br from-primary-50 to-primary-100 border border-primary-200 rounded-2xl flex items-center justify-center shrink-0 shadow-md group-hover:shadow-lg group-hover:bg-primary transition-all group-hover:rotate-6 relative z-10">
-                  <PlayCircle className="w-8 h-8 text-primary group-hover:text-white" />
+                <div className={`w-16 h-16 bg-gradient-to-br ${gradient.light} border ${gradient.border} rounded-2xl flex items-center justify-center shrink-0 shadow-md group-hover:shadow-lg group-hover:scale-110 transition-all relative z-10`}>
+                  <PlayCircle className={`w-8 h-8 ${gradient.icon} group-hover:text-white`} />
                 </div>
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center justify-between mb-4">
@@ -153,7 +170,8 @@ export default function StudentDashboard() {
                   Continue
                 </Link>
               </motion.div>
-            ))}
+            );
+            })}
           </div>
         </div>
 

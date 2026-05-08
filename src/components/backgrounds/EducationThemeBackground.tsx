@@ -86,28 +86,6 @@ export const EducationThemeBackground = () => {
       svg.appendChild(g);
     };
 
-    // Create floating circles
-    const createFloatingCircle = (x: number, y: number, r: number, delay: number) => {
-      const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-      circle.setAttribute('cx', String(x));
-      circle.setAttribute('cy', String(y));
-      circle.setAttribute('r', String(r));
-      circle.setAttribute('fill', '#e8f0ff');
-      circle.setAttribute('opacity', '0.6');
-
-      const animate = document.createElementNS('http://www.w3.org/2000/svg', 'animateTransform');
-      animate.setAttribute('attributeName', 'transform');
-      animate.setAttribute('type', 'translate');
-      animate.setAttribute('values', `0,0; 0,-30; 0,0`);
-      animate.setAttribute('dur', '7s');
-      animate.setAttribute('begin', `${delay}s`);
-      animate.setAttribute('repeatCount', 'indefinite');
-      animate.setAttribute('additive', 'sum');
-
-      circle.appendChild(animate);
-      svg.appendChild(circle);
-    };
-
     // Add elements
     createBook(150, 100, 0);
     createBook(300, 200, 1);
@@ -118,10 +96,6 @@ export const EducationThemeBackground = () => {
     createGraduationCap(200, 300, 0.3);
     createGraduationCap(450, 350, 1.2);
     createGraduationCap(600, 280, 0.7);
-
-    createFloatingCircle(100, 250, 60, 0);
-    createFloatingCircle(650, 150, 80, 1);
-    createFloatingCircle(350, 400, 50, 0.5);
 
   }, []);
 

@@ -16,6 +16,7 @@ interface CourseCardProps {
   image: string;
   level: "Beginner" | "Intermediate" | "Advanced";
   category: string;
+  demoVideo?: string;
 }
 
 const CourseCard: React.FC<CourseCardProps> = ({
@@ -28,41 +29,59 @@ const CourseCard: React.FC<CourseCardProps> = ({
   image,
   level,
   category,
+  demoVideo,
 }) => {
   const teacher = TEACHERS.find(t => t.id === instructor);
+  const [showVideo, setShowVideo] = React.useState(false);
 
   return (
     <motion.div 
       initial={{ opacity: 0, y: 8 }}
       animate={{ opacity: 1, y: 0 }}
-      whileHover={{ y: -8 }}
+      whileHover={{ y: -12 }}
       transition={{ duration: 0.3 }}
-      className="group bg-white rounded-2xl border border-gray-100 shadow-lg hover:shadow-2xl hover:shadow-primary/10 hover:border-primary/30 transition-all duration-500 overflow-hidden flex flex-col h-full relative"
+      className="group bg-white rounded-3xl border-2 border-gray-100 shadow-lg hover:shadow-2xl hover:shadow-primary/20 hover:border-primary/40 transition-all duration-500 overflow-hidden flex flex-col h-full relative"
     >
       {/* Glow effect on hover */}
-      <div className="absolute -inset-0.5 bg-gradient-to-r from-primary/0 via-primary/0 to-primary/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+      <div className="absolute -inset-0.5 bg-gradient-to-r from-primary/0 via-primary/10 to-primary/5 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
       
       <div className="relative flex flex-col h-full">
         {/* Image Section */}
         <div className="relative aspect-[16/10] overflow-hidden shrink-0 bg-gradient-to-br from-primary-100 via-primary-50 to-blue-100">
-          <img
-            src={image}
-            alt={title}
-            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-            onError={(e) => {
-              const img = e.target as HTMLImageElement;
-              img.style.display = 'none';
-            }}
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
-            <motion.div
-              initial={{ scale: 0.8, opacity: 0 }}
-              whileHover={{ scale: 1, opacity: 1 }}
-              transition={{ duration: 0.3 }}
-            >
-              <PlayCircle className="text-white w-16 h-16 opacity-90 drop-shadow-xl" />
-            </motion.div>
-          </div>
+          {showVideo && demoVideo ? (
+            <iframe
+              src={demoVideo}
+              title={title}
+              className="w-full h-full"
+              allowFullScreen
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            />
+          ) : (
+            <>
+              <img
+                src={image}
+                alt={title}
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-125"
+                onError={(e) => {
+                  const img = e.target as HTMLImageElement;
+                  img.src = "https://images.unsplash.com/photo-1516307365440-15265e8537d3?auto=format&fit=crop&q=80&w=800&h=500";
+                }}
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
+                {demoVideo && (
+                  <motion.button
+                    onClick={() => setShowVideo(true)}
+                    initial={{ scale: 0.7, opacity: 0 }}
+                    whileHover={{ scale: 1, opacity: 1 }}
+                    transition={{ duration: 0.3 }}
+                    className="p-4"
+                  >
+                    <PlayCircle className="text-white w-20 h-20 opacity-100 drop-shadow-2xl fill-white hover:scale-110 transition-transform" />
+                  </motion.button>
+                )}
+              </div>
+            </>
+          )}
         <div className="absolute top-3 left-3 flex flex-col gap-2">
           <span className="px-2.5 py-1 bg-white/90 backdrop-blur-md text-primary text-[9px] font-black uppercase tracking-widest rounded-md shadow-sm border border-white/20">
             {category}
@@ -96,24 +115,24 @@ const CourseCard: React.FC<CourseCardProps> = ({
             <Link href={`/courses/${id}`} className="hover:underline">{title}</Link>
           </h3>
 
-          <div className="mt-auto pt-5 flex items-center justify-between border-t border-gray-100">
+          <div className="mt-auto pt-6 flex items-center justify-between border-t-2 border-gray-100">
             <div className="flex items-center gap-2.5">
               <img 
                 src={teacher?.image} 
                 alt={teacher?.name} 
-                className="w-8 h-8 rounded-full object-cover border-2 border-gray-100 shadow-sm"
+                className="w-9 h-9 rounded-full object-cover border-2 border-primary/20 shadow-md"
               />
               <div className="flex flex-col">
-                <span className="text-[10px] font-bold text-gray-600 leading-none">{teacher?.name}</span>
+                <span className="text-xs font-bold text-gray-900 leading-none">{teacher?.name}</span>
                 <span className="text-[9px] text-gray-400 font-semibold mt-0.5">{teacher?.specialty}</span>
               </div>
             </div>
             <motion.div 
               className="text-right"
-              whileHover={{ scale: 1.05 }}
+              whileHover={{ scale: 1.1 }}
               transition={{ duration: 0.2 }}
             >
-              <span className="text-sm font-black text-primary">{price}</span>
+              <span className="text-base font-black text-primary">{price}</span>
             </motion.div>
           </div>
         </div>
