@@ -16,6 +16,7 @@ interface CourseCardProps {
   image: string;
   level: "Beginner" | "Intermediate" | "Advanced";
   category: string;
+  demoVideo?: string;
 }
 
 const CourseCard: React.FC<CourseCardProps> = ({
@@ -28,8 +29,10 @@ const CourseCard: React.FC<CourseCardProps> = ({
   image,
   level,
   category,
+  demoVideo,
 }) => {
   const teacher = TEACHERS.find(t => t.id === instructor);
+  const [showVideo, setShowVideo] = React.useState(false);
 
   return (
     <motion.div 
@@ -45,24 +48,40 @@ const CourseCard: React.FC<CourseCardProps> = ({
       <div className="relative flex flex-col h-full">
         {/* Image Section */}
         <div className="relative aspect-[16/10] overflow-hidden shrink-0 bg-gradient-to-br from-primary-100 via-primary-50 to-blue-100">
-          <img
-            src={image}
-            alt={title}
-            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-125"
-            onError={(e) => {
-              const img = e.target as HTMLImageElement;
-              img.style.display = 'none';
-            }}
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
-            <motion.div
-              initial={{ scale: 0.7, opacity: 0 }}
-              whileHover={{ scale: 1, opacity: 1 }}
-              transition={{ duration: 0.3 }}
-            >
-              <PlayCircle className="text-white w-20 h-20 opacity-100 drop-shadow-2xl fill-white" />
-            </motion.div>
-          </div>
+          {showVideo && demoVideo ? (
+            <iframe
+              src={demoVideo}
+              title={title}
+              className="w-full h-full"
+              allowFullScreen
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            />
+          ) : (
+            <>
+              <img
+                src={image}
+                alt={title}
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-125"
+                onError={(e) => {
+                  const img = e.target as HTMLImageElement;
+                  img.src = "https://images.unsplash.com/photo-1516307365440-15265e8537d3?auto=format&fit=crop&q=80&w=800&h=500";
+                }}
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
+                {demoVideo && (
+                  <motion.button
+                    onClick={() => setShowVideo(true)}
+                    initial={{ scale: 0.7, opacity: 0 }}
+                    whileHover={{ scale: 1, opacity: 1 }}
+                    transition={{ duration: 0.3 }}
+                    className="p-4"
+                  >
+                    <PlayCircle className="text-white w-20 h-20 opacity-100 drop-shadow-2xl fill-white hover:scale-110 transition-transform" />
+                  </motion.button>
+                )}
+              </div>
+            </>
+          )}
         <div className="absolute top-3 left-3 flex flex-col gap-2">
           <span className="px-2.5 py-1 bg-white/90 backdrop-blur-md text-primary text-[9px] font-black uppercase tracking-widest rounded-md shadow-sm border border-white/20">
             {category}

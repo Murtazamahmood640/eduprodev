@@ -38,7 +38,7 @@ const FeaturedCourses = () => {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-        {COURSES.map((course, i) => (
+        {COURSES.slice(0, 4).map((course, i) => (
           <motion.div
             key={course.id}
             initial={{ opacity: 0, y: 24 }}
@@ -56,6 +56,7 @@ const FeaturedCourses = () => {
               image={course.image}
               level={course.level}
               category={course.category}
+              demoVideo={course.demoVideo}
             />
           </motion.div>
         ))}
